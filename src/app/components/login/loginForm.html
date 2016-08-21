@@ -1,0 +1,60 @@
+<form class="form-horizontal" 
+  name="loginForm" 
+  ng-submit="vm.submitForm(user)" 
+  novalidate>
+    <div class="form-group" 
+	  ng-class="{ 'has-error' : loginForm.email.$invalid && !loginForm.email.$pristine }">
+        <label for="mail" class="col-sm-2 control-label">Email</label>
+        <div class="col-sm-10">
+            <input type="email"
+              name="email" 			
+			  class="form-control" 
+			  id="mail" 
+			  placeholder="Email" 
+			  ng-model="user.email" 
+			  required>
+            <p ng-show="loginForm.email.$invalid && !loginForm.email.$pristine" 
+	    	  class="help-block">You email is required.</p>
+		    <p ng-show="loginForm.email.$error.minlength" 
+		      class="help-block">Email is too short.</p>
+            <p ng-show="loginForm.email.$error.maxlength" 
+		      class="help-block">Email is too long.</p>
+		    <p ng-show="loginForm.email.$invalid && !loginForm.email.$pristine" 
+		      class="help-block">Enter a valid email.</p>
+        </div>		
+    </div>
+    <div class="form-group">
+        <label for="pass" class="col-sm-2 control-label">Пароль</label>
+        <div class="col-sm-10">
+            <input type="password"
+              name="password" 			
+			  class="form-control" 
+			  id="pass" 
+			  placeholder="Пароль"
+			  ng-model="user.password" 
+			  required>
+	        <p ng-show="loginForm.password.$invalid && !loginForm.password.$pristine" 
+		      class="help-block">You password is required.</p>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox"
+					  value="agree"
+				      name="check"
+				      ng-model="user.check" >
+					Запомнить меня
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" 
+			  class="btn btn-primary" 
+			  ng-disabled="loginForm.$invalid">Подтвердить</button>
+        </div>
+    </div>
+</form>

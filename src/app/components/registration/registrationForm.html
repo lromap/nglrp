@@ -1,0 +1,183 @@
+<form class="form-horizontal" 
+  name="userForm"
+  ng-model="data"  
+  ng-submit="vm.submitForm(data)" 
+  novalidate>
+    <div class="form-group">
+        <label class="control-label col-xs-3" for="lastName">Фамилия:</label>
+        <div class="col-xs-9">
+            <input type="text" 
+			  class="form-control" 
+			  id="lastName" 
+			  placeholder="Введите фамилию"
+			  name="lastName"
+              ng-init="vm.lastNameStatus=false;"
+              ng-blur="vm.lastNameStatus=true;"			  
+			  ng-model="data.lastName" 
+			  required >
+			<div ng-if="vm.lastNameStatus && userForm.lastName.$error.required" class="error">
+              You forgot to enter your lastName address…
+            </div>
+        </div>		
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-3" for="firstName">Имя:</label>
+        <div class="col-xs-9">
+            <input type="text" 
+			  class="form-control" 
+			  id="firstName" 
+			  placeholder="Введите имя"
+			  name="firstName"
+              ng-init="vm.firstNameStatus=false;"
+              ng-blur="vm.firstNameStatus=true;"			  
+			  ng-model="data.firstName"
+			  ng-minlength="5" 
+			  ng-maxlength="30" 
+			  required >
+			<ng-messages for="vm.firstNameStatus && userForm.firstName.$error" multiple>
+              <ng-message when="required">You forgot to enter your firstName...</ng-message>
+              <ng-message when="minlength">Your firstName address is too short...</ng-message>
+              <ng-message when="maxlength">Your firstName address is too long...</ng-message>
+            </ng-messages>            
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-3" for="fatherName">Отчество:</label>
+        <div class="col-xs-9">
+            <input type="text" 
+			  class="form-control" 
+			  id="fatherName" 
+			  placeholder="Введите отчество"
+			  name="fatherName"
+              ng-init="vm.fatherNameStatus=false;"
+              ng-blur="vm.fatherNameStatus=true;"			  
+			  ng-model="data.fatherName" 
+			  required >
+			<div ng-if="vm.fatherNameStatus && userForm.fatherName.$error.required" class="error">
+              You forgot to enter your fatherName…
+            </div>
+        </div>
+    </div>    
+    <div class="form-group">
+        <label class="control-label col-xs-3" for="emailAddress">Email:</label>
+        <div class="col-xs-9">
+            <input type="email" 
+			  class="form-control" 
+			  id="emailAddress" 
+			  placeholder="Email"
+			  name="emailAddress"
+              ng-init="vm.emailAddressStatus=false;"
+              ng-blur="vm.emailAddressStatus=true;"				  
+			  ng-model="data.email" 
+			  required >
+			<div ng-messages="vm.emailAddressStatus && userForm.emailAddress.$error" ng-messages-multiple>
+              <div ng-message="required">You forgot to enter your email address…</div>
+              <div ng-message="minlength">Your email address address is too short...</div>
+              <div ng-message="maxlength">Your email address address is too long...</div>
+              <div ng-message="email">Enter a valid email.…</div>
+              <div ng-message="recordLoading">Checking database...</div>
+              <div ng-message="recordAvailable">The email address is already in use...</div>
+            </div>
+        </div>
+	</div>	
+    <div class="form-group">
+        <label class="control-label col-xs-3" for="inputPassword">Пароль:</label>
+        <div class="col-xs-9">
+            <input type="password" 
+			  class="form-control" 
+			  id="inputPassword" 
+			  placeholder="Введите пароль"
+			  name="password"
+              ng-init="vm.passwordStatus=false;"
+              ng-blur="vm.passwordStatus=true;"			  
+			  ng-model="data.password"
+              ng-minlength="5" 
+			  ng-maxlength="30"			  
+			  required >
+			<ng-messages for="vm.passwordStatus && userForm.password.$error" multiple>
+              <ng-message when="required">You forgot to enter your password...</ng-message>
+              <ng-message when="minlength">Your password is too short...</ng-message>
+              <ng-message when="maxlength">Your password is too long...</ng-message>
+            </ng-messages> 
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-3" for="confirmPassword">Подтвердите пароль:</label>
+        <div class="col-xs-9">
+            <input type="password" 
+			  class="form-control" 
+			  id="confirmPassword" 
+			  placeholder="Введите пароль ещё раз"
+			  name="confirmPassword"
+              ng-init="vm.confirmPasswordStatus=false;"
+              ng-blur="vm.confirmPasswordStatus=true;"			  
+			  ng-model="data.confirmPassword"
+              ng-minlength="5" 
+			  ng-maxlength="30"			  
+			  required >
+			<ng-messages for="vm.confirmPasswordStatus && userForm.confirmPassword.$error" multiple>
+              <ng-message when="required">You forgot to enter your confirmPassword...</ng-message>
+              <ng-message when="minlength">Your confirmPassword is too short...</ng-message>
+              <ng-message when="maxlength">Your confirmPassword is too long...</ng-message>
+            </ng-messages> 
+			<div ng-show="vm.confirmPasswordStatus && (data.password != data.confirmPassword)" class="error">
+              Passwords do not match...
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-3" for="phoneNumber">Телефон:</label>
+        <div class="col-xs-9">
+            <input type="tel" 
+			  class="form-control" 
+			  id="phoneNumber" 
+			  placeholder="Введите номер телефона"
+			  name="phoneNumber"
+			  ng-init="vm.phoneNumberStatus=false;"
+              ng-blur="vm.phoneNumberStatus=true;"
+              ng-pattern="vm.regex"			  
+			  ng-model="data.phoneNumber"              			  
+			  required >
+			<ng-messages for="vm.phoneNumberStatus && userForm.phoneNumber.$error" multiple>
+              <ng-message when="required">You forgot to enter your phoneNumber...</ng-message>
+              <ng-message when="pattern">Enter only digits...</ng-message>              
+            </ng-messages>
+        </div>
+    </div>    
+    <div class="form-group">
+        <div class="col-xs-offset-3 col-xs-9">
+            <label class="checkbox-inline">
+                <input type="checkbox" 
+				  value="agree"
+				  name="check"
+                  ng-init="vm.check=false;"	
+                  ng-mouseover="vm.check=true;"				  
+				  ng-model="data.check"
+				  required >  Я согласен с <a href="#">условиями</a>.
+            </label>
+			<div ng-if="vm.check && userForm.check.$error.required" class="error">
+              You must agree…
+            </div>
+        </div>
+    </div>
+	<div ng-show="userForm.$valid" 
+	  class="yousuper">              
+               The form is valid on the client! You are super…
+    </div>
+	<div ng-show="vm.yousuperstar" 
+	  class="yousuperstar">              
+               The form is valid on the server! You are super-star…
+    </div>
+    <br />
+    <div class="form-group">
+        <div class="col-xs-offset-3 col-xs-9">
+            <input type="submit" 
+			  class="btn btn-primary" 
+			  value="Регистрация"			  
+              ng-disabled="userForm.$invalid" >
+            <input type="reset" 
+			  class="btn btn-default" 
+			  value="Очистить форму">
+        </div>
+    </div>
+</form>
